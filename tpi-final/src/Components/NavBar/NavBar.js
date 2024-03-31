@@ -23,22 +23,17 @@ const NavBar = () => {
           <ul class="navbar-nav">
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="#">
-                Home
+                Nosotros
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">
-                Features
+                Nuestro Trabajo
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">
-                Pricing
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" aria-disabled="true">
-                Disabled
+                Turnos
               </a>
             </li>
           </ul>
