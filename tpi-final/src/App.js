@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 
 import "./App.css";
+import "bootstrap/dist/css/bootstrap.css";
 
 import NavBar from "./Components/NavBar/NavBar";
 import Footer from "./Components/Footer/Footer";
