@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Login.css";
 
-const LoginForm = () => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [contraseña, setContraseña] = useState("");
 
@@ -57,4 +57,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default Login;

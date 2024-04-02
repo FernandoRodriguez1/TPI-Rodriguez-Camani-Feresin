@@ -1,13 +1,11 @@
-import logo from "./logo.svg";
 import "./App.css";
-import LoginForm from "./Components/Pages/Login";
-import Register from "./Components/Pages/Register";
-import Home from "./Components/Pages/Home";
+
+import Routess from "./Components/Routess";
 
 function App() {
   return (
     <div className="App">
-      <Home />
+      <Routess />
     </div>
   );
 }
