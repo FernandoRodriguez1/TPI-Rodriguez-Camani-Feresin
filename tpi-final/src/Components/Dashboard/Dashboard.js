@@ -1,9 +1,11 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Dashboard.css";
+import Review from "../Review/ReviewList/ReviewList";
 
 const Dashboard = () => {
   return (
     <div className="dashboard-container">
+      <Review />
       <h1>TEGOBI'S</h1>
       <p>
         Hola, somos Tegobi's, un grupo de peluqueros asociados con más de 10

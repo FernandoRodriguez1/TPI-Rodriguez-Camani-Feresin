@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./NavBar.css";
 
 const NavBar = () => {
+  // AGREGAR LA PICTURE COMO LOGO
   return (
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
