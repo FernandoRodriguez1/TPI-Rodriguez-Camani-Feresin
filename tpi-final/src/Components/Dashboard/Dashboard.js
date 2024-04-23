@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Dashboard.css";
 import Review from "../Review/ReviewList/ReviewList";
-
+import { Link } from "react-router-dom";
 const Dashboard = () => {
   return (
     <div className="dashboard-container">
@@ -16,6 +16,7 @@ const Dashboard = () => {
         de imagen completo o simplemente un mantenimiento regular, ¡Estamos aquí
         para ayudarte a lucir tu mejor versión!
       </p>
+      <Link to="/appointment">Quiero agendar un turno</Link>
     </div>
   );
 };

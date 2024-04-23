@@ -13,6 +13,7 @@ import Error404 from "./Components/Pages/Error404";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
+import FormAppointment from "./Components/Appointments/Appointments";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -44,6 +45,16 @@ const App = () => {
         <>
           <NavBar />
           <Register />
+          <Footer />
+        </>
+      ),
+    },
+    {
+      path: "/appointment",
+      element: (
+        <>
+          <NavBar />
+          <FormAppointment />
           <Footer />
         </>
       ),
