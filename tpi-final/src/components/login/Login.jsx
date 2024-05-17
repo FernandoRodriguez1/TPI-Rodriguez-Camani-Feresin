@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
+
+import "./Login.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -79,7 +81,8 @@ const Login = () => {
 };
 
 export default Login;
-// import React, { useState } from "react";
+// import { useState } from "react";
+
 // import "./Login.css";
 
 // const Login = () => {

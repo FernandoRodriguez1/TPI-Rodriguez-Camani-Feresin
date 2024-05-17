@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
+
 import "./ReviewList.css";
+
 const ReviewList = () => {
   const [showResponseForm, setShowResponseForm] = useState(false);
   const [response, setResponse] = useState("");

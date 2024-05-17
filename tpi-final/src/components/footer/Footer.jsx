@@ -1,4 +1,3 @@
-import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebook,
@@ -6,7 +5,6 @@ import {
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
 import "./Footer.css";
-import { useEffect } from "react";
 
 const Footer = () => {
   return (

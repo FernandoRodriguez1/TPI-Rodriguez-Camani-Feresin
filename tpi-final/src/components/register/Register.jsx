@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
+
 import "./Register.css";
+
 const Register = () => {
   const [usuarios, setUsuarios] = useState([]);
   const [nombre, setNombre] = useState("");

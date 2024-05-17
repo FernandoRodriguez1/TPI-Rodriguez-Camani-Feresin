@@ -4,8 +4,9 @@ import {
   createBrowserRouter,
 } from "react-router-dom";
 
-import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 
 import NavBar from "./components/navBar/NavBar";
 import Footer from "./components/footer/Footer";

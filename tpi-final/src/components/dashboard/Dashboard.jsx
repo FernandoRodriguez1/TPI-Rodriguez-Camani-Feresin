@@ -1,7 +1,9 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./Dashboard.css";
-import Review from "../reviews/reviewList/ReviewList";
 import { Link } from "react-router-dom";
+
+import "./Dashboard.css";
+
+import Review from "../reviews/reviewList/ReviewList";
+
 const Dashboard = () => {
   return (
     <div className="dashboard-container">

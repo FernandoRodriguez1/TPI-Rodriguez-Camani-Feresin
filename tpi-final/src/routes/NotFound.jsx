@@ -1,7 +1,6 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
-const Error404 = () => {
+const NotFound = () => {
   return (
     <div>
       <h1>Error, página no encontrada, por favor vuelva al inicio.</h1>
@@ -12,4 +11,4 @@ const Error404 = () => {
   );
 };
 
-export default Error404;
+export default NotFound;

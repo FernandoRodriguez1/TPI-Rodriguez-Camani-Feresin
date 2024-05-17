@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import "./Appointments.css"; // Importa el archivo CSS
+import { useState } from "react";
 
-const FormAppointment = () => {
+import "./AppointmentForm.css"; // Importa el archivo CSS
+
+const AppointmentForm = () => {
   const [date, setDate] = useState("");
   const [hour, setHour] = useState("");
   const [product, setProduct] = useState("");
@@ -90,4 +91,4 @@ const FormAppointment = () => {
   );
 };
 
-export default FormAppointment;
+export default AppointmentForm;
