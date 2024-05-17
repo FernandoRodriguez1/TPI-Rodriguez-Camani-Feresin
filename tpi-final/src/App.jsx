@@ -7,18 +7,18 @@ import {
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 
-import NavBar from "./Components/NavBar/NavBar";
-import Footer from "./Components/Footer/Footer";
-import Error404 from "./Components/Pages/Error404";
-import Dashboard from "./Components/Dashboard/Dashboard";
-import Login from "./Components/Login/Login";
-import Register from "./Components/Register/Register";
-import FormAppointment from "./Components/Appointments/Appointments";
+import NavBar from "./components/navBar/NavBar";
+import Footer from "./components/footer/Footer";
+import NotFound from "./routes/NotFound";
+import Dashboard from "./components/dashboard/Dashboard";
+import Login from "./components/login/Login";
+import Register from "./components/register/Register";
+import FormAppointment from "./components/appointments/Appointments";
 
 const App = () => {
   const router = createBrowserRouter([
     { path: "/home", element: <Navigate to="/" replace /> },
-    { path: "*", element: <Error404 /> },
+    { path: "*", element: <NotFound /> },
     {
       path: "/",
       element: (
