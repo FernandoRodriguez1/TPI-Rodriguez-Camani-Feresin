@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import "./AppointmentForm.css"; // Importa el archivo CSS
+import "./CreateAppointment.css"; // Importa el archivo CSS
 
 const AppointmentForm = () => {
   const [date, setDate] = useState("");

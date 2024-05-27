@@ -2,12 +2,12 @@ import { Link } from "react-router-dom";
 
 import "./Dashboard.css";
 
-import Review from "../reviews/reviewList/ReviewList";
+import ReviewList from "../reviews/reviewList/ReviewList";
 
 const Dashboard = () => {
   return (
     <div className="dashboard-container">
-      <Review />
+      <ReviewList />
       <h1>TEGOBI'S</h1>
       <p>
         Hola, somos Tegobi's, un grupo de peluqueros asociados con más de 10

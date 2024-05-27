@@ -8,13 +8,13 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-import NavBar from "./components/navBar/NavBar";
-import Footer from "./components/footer/Footer";
+import NavBarFooter from "./components/layouts/NavBarFooter";
 import NotFound from "./routes/NotFound";
 import Dashboard from "./components/dashboard/Dashboard";
 import Login from "./components/login/Login";
 import Register from "./components/register/Register";
-import FormAppointment from "./components/appointments/Appointments";
+import AppointmentForm from "./components/appointments/createAppointment/CreateAppointment";
+import UsersManager from "./components/management/users/UsersManager";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -22,43 +22,26 @@ const App = () => {
     { path: "*", element: <NotFound /> },
     {
       path: "/",
-      element: (
-        <>
-          <NavBar />
-          <Dashboard />
-          <Footer />
-        </>
-      ),
-    },
-    {
-      path: "/login",
-      element: (
-        <>
-          <NavBar />
-          <Login />
-          <Footer />
-        </>
-      ),
-    },
-    {
-      path: "/register",
-      element: (
-        <>
-          <NavBar />
-          <Register />
-          <Footer />
-        </>
-      ),
-    },
-    {
-      path: "/appointment",
-      element: (
-        <>
-          <NavBar />
-          <FormAppointment />
-          <Footer />
-        </>
-      ),
+      element: <NavBarFooter />,
+      children: [
+        {
+          path: "/",
+          element: <Dashboard />,
+        },
+        {
+          path: "/login",
+          element: <Login />,
+        },
+        {
+          path: "/register",
+          element: <Register />,
+        },
+        {
+          path: "/appointment",
+          element: <AppointmentForm />,
+        },
+        { path: "/manage/users", element: <UsersManager /> },
+      ],
     },
   ]);
 
