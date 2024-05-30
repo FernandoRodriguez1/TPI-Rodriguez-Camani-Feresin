@@ -42,7 +42,7 @@ const App = () => {
         },
         { path: "/manage/users", element: <UsersManager /> },
         {
-          path: "/profilepage",
+          path: "/editprofile",
           element: <Profilepage />,
         },
       ],

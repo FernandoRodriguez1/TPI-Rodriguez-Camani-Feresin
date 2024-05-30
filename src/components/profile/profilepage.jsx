@@ -1,58 +1,46 @@
 import { useContext, useState } from "react";
 
-import { APIContext } from "../../services/apiContext/apiContext";
 import "./profilepage.css";
 const Profilepage = () => {
-  const { users } = useContext(APIContext);
-  const [newPassword, setNewPassword] = useState(null);
-  const [newAvatar, setNewAvatar] = useState(null);
+  const [newPassword, setNewPassword] = useState("");
+  const [validations, setValidations] = useState({
+    minLength: false,
+    maxLength: false,
+    uppercase: false,
+    lowercase: false,
+    number: false,
+  });
+
+  const isFormValid = () => {
+    return Object.values(validations).every(Boolean);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (!newAvatar && !newPassword) {
-      alert("Debe ingresar al menos un campo para actualizar.");
-      return;
+    if (isFormValid()) {
+      console.log("Formulario enviado");
+    } else {
+      console.log("La contraseña no cumple con todos los requisitos");
     }
-    // if (newAvatar) {
-    //   updateEmail(user, newAvatar)
-    //     .then(() => {
-    //       alert("actualizado correctamente.");
-    //     })
-    //     .catch((error) => {
-    //       alert("Se produjo un error");
-    //     });
-    // }
-
-    // if (newPassword) {
-    //   updatePassword(user, newPassword)
-    //     .then(() => {
-    //       alert("Contraseña actualizada correctamente.");
-    //     })
-    //     .catch((error) => {
-    //       alert("Se produjo un error al actualizar la contraseña.");
-    //     });
-    // }
-  };
-
-  const handleAvatarChange = (e) => {
-    setNewAvatar(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
-    setNewPassword(e.target.value);
+    const { value } = e.target;
+    setNewPassword(value);
+
+    setValidations({
+      minLength: value.length >= 8,
+      maxLength: value.length <= 16,
+      uppercase: /[A-Z]/.test(value),
+      lowercase: /[a-z]/.test(value),
+      number: /[0-9]/.test(value),
+    });
   };
   return (
     <div className="profile-container">
       <form className="formProfile" onSubmit={handleSubmit}>
         <h1>Modificar Credenciales</h1>
-        <label>Ingrese su nueva foto de perfil</label>
-        <input
-          onChange={handleAvatarChange}
-          type="text"
-          className="input-form"
-          value={newAvatar}
-        />
+
         <label>Ingrese su nueva contraseña</label>
         <input
           onChange={handlePasswordChange}
@@ -60,20 +48,44 @@ const Profilepage = () => {
           className="input-form"
           value={newPassword}
         />
-        <button className="btn-form" type="submit">
+        <ul className="password-requirements">
+          <li className={validations.minLength ? "valid" : ""}>
+            Al menos 8 caracteres.
+          </li>
+          <li className={validations.maxLength ? "valid" : ""}>
+            Máximo 16 caracteres.
+          </li>
+          <li className={validations.uppercase ? "valid" : ""}>
+            Por lo menos una mayúscula.
+          </li>
+          <li className={validations.lowercase ? "valid" : ""}>
+            Por lo menos una minúscula.
+          </li>
+          <li className={validations.number ? "valid" : ""}>
+            Deberá contar con al menos un número.
+          </li>
+        </ul>
+        <button className="btn-form" type="submit" disabled={!isFormValid()}>
           Guardar cambios
         </button>
       </form>
 
-      <h1>Mis reservas.</h1>
+      <h1>Mis reservas</h1>
       <div className="card-container">
         <ul>
           <li className="card-item">
-            <h2 className="card-title">30/05/2024 18:30</h2>
+            <h2 className="card-title">30/05/2024</h2>
             <p className="card-description">Corte de pelo + coloracion</p>
-            <div className="img-container">
-              {/* <img className="card-img" src={imgUrl} alt={title} /> */}
-            </div>
+            <div className="img-container"></div>
+            <button className="btn-cancel">Cancelar turno</button>
+          </li>
+        </ul>
+
+        <ul>
+          <li className="card-item">
+            <h2 className="card-title">30/05/2024</h2>
+            <p className="card-description">Corte de pelo + coloracion</p>
+            <div className="img-container"></div>
             <button className="btn-cancel">Cancelar turno</button>
           </li>
         </ul>
@@ -83,11 +95,9 @@ const Profilepage = () => {
       <div className="card-container">
         <ul>
           <li className="card-item">
-            <h2 className="card-title">1/04/2024 13:00</h2>
+            <h2 className="card-title">1/04/2024</h2>
             <p className="card-description">Corte de pelo</p>
-            <div className="img-container">
-              {/* <img className="card-img" src={imgUrl} alt={title} /> */}
-            </div>
+            <div className="img-container"></div>
             <button className="btn-review">Dejar una reseña</button>
           </li>
         </ul>

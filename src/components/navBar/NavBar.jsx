@@ -2,10 +2,11 @@ import "./NavBar.css";
 
 const NavBar = () => {
   // AGREGAR LA PICTURE COMO LOGO
+  // agregar li para admin que vea Usuarios.
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">
+        <a className="navbar-brand" href="/">
           TEGOBI'S
         </a>
         <button
@@ -32,7 +33,7 @@ const NavBar = () => {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
+              <a className="nav-link" href="/appointment">
                 Turnos
               </a>
             </li>
