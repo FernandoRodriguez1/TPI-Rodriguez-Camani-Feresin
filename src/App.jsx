@@ -15,6 +15,9 @@ import Login from "./components/login/Login";
 import Register from "./components/register/Register";
 import AppointmentForm from "./components/appointments/createAppointment/CreateAppointment";
 import UsersManager from "./components/management/users/UsersManager";
+import Profilepage from "./components/profile/profilepage";
+import GaleryPhotosPage from "./components/galery-photos/galery-photos";
+import ReviewList from "./components/reviews/reviewList/ReviewList";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -41,6 +44,18 @@ const App = () => {
           element: <AppointmentForm />,
         },
         { path: "/manage/users", element: <UsersManager /> },
+        {
+          path: "/editprofile",
+          element: <Profilepage />,
+        },
+        {
+          path: "/galerypage",
+          element: <GaleryPhotosPage />,
+        },
+        {
+          path: "/reviews",
+          element: <ReviewList/>,
+        },
       ],
     },
   ]);
