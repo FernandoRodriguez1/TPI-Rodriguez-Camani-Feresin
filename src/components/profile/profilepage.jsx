@@ -39,7 +39,7 @@ const Profilepage = () => {
   return (
     <div className="profile-container">
       <form className="formProfile" onSubmit={handleSubmit}>
-        <h1>Modificar Credenciales</h1>
+        <h1 className="title-form">Modificar Credenciales</h1>
 
         <label>Ingrese su nueva contraseña</label>
         <input
@@ -70,7 +70,7 @@ const Profilepage = () => {
         </button>
       </form>
 
-      <h1>Mis reservas</h1>
+      <h1 className="titles-appointments">Mis reservas</h1>
       <div className="card-container">
         <ul>
           <li className="card-item">
@@ -91,7 +91,7 @@ const Profilepage = () => {
         </ul>
       </div>
 
-      <h1>Turnos ya concretados.</h1>
+      <h1 className="titles-appointments">Turnos ya concretados.</h1>
       <div className="card-container">
         <ul>
           <li className="card-item">

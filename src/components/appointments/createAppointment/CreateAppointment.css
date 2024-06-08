@@ -1,4 +1,5 @@
 .form-container {
+  background-color: #0f172a;
   width: 300px;
   margin: 0 auto;
   padding: 20px;
@@ -6,6 +7,7 @@
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   height: max-content;
+  color: #fff;
 }
 
 .form-container h2 {

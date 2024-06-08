@@ -6,8 +6,27 @@ const Register = () => {
   const [usuarios, setUsuarios] = useState([]);
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
-  const [contraseña, setContraseña] = useState("");
+  const [password, setPassword] = useState("");
+  const [validations, setValidations] = useState({
+    minLength: false,
+    maxLength: false,
+    uppercase: false,
+    lowercase: false,
+    number: false,
+  });
 
+  const handlePasswordChange = (e) => {
+    const { value } = e.target;
+    setPassword(value);
+
+    setValidations({
+      minLength: value.length >= 8,
+      maxLength: value.length <= 16,
+      uppercase: /[A-Z]/.test(value),
+      lowercase: /[a-z]/.test(value),
+      number: /[0-9]/.test(value),
+    });
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     const nuevoUsuario = { id: usuarios.length + 1, nombre, email, contraseña };
@@ -56,15 +75,30 @@ const Register = () => {
           />
         </div>
         <div className="form-group">
-          <label>Contraseña:</label>
-          <input
-            className="input-field"
-            type="password"
-            id="contraseña"
-            value={contraseña}
-            onChange={(e) => setContraseña(e.target.value)}
-            required
-          />
+        <label>Ingrese su nueva contraseña</label>
+        <input
+          onChange={handlePasswordChange}
+          type="password"
+          className="input-form"
+          value={password}
+        />
+        <ul className="password-requirements">
+          <li className={validations.minLength ? "valid" : ""}>
+            Al menos 8 caracteres.
+          </li>
+          <li className={validations.maxLength ? "valid" : ""}>
+            Máximo 16 caracteres.
+          </li>
+          <li className={validations.uppercase ? "valid" : ""}>
+            Por lo menos una mayúscula.
+          </li>
+          <li className={validations.lowercase ? "valid" : ""}>
+            Por lo menos una minúscula.
+          </li>
+          <li className={validations.number ? "valid" : ""}>
+            Deberá contar con al menos un número.
+          </li>
+        </ul>
         </div>
         <button type="submit" className="button-form">
           Registrarse

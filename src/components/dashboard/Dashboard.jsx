@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./Dashboard.css";
 
 import ReviewList from "../reviews/reviewList/ReviewList";
+import GaleryPhotosPage from "../galery-photos/galery-photos";
 
 const Dashboard = () => {
   return (
@@ -18,7 +19,10 @@ const Dashboard = () => {
         de imagen completo o simplemente un mantenimiento regular, ¡Estamos aquí
         para ayudarte a lucir tu mejor versión!
       </p>
-      <Link to="/appointment">Quiero agendar un turno</Link>
+      <Link to="/appointment" className="link-ref">Quiero agendar un turno</Link>
+
+      <h4>Algunos de nuestros trabajos</h4>
+      <GaleryPhotosPage/>
     </div>
   );
 };
