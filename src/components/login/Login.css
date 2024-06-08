@@ -1,56 +1,70 @@
+/* Contenedor del formulario */
 .registro-form-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-.registro-form {
-  background-color: cornflowerblue;
-  padding: 20px;
+  background-color: #0f172a; /* Fondo del formulario */
+  padding: 2rem;
   border-radius: 8px;
+  max-width: 400px;
+  margin: 0 auto;
+  color: white; /* Texto blanco para buen contraste */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-.registro-form h2 {
-  margin-bottom: 20px;
-  color: black;
+
+/* Estilos del formulario */
+.registro-form {
+  display: flex;
+  flex-direction: column;
 }
+
+h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: white; /* Color del título */
+}
+
+/* Grupo de formulario */
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 1rem;
 }
-label {
+
+/* Etiquetas */
+.form-group label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 0.5rem;
+  color: white; /* Color de las etiquetas */
 }
 
+/* Campos de entrada */
 .input-field {
-  padding: 10px;
-  border: 1px solid #ced4da;
-  border-radius: 40px;
-}
-.button-togg {
   width: 100%;
-  padding: 10px;
-  background-color: #ff0000;
-  border: none;
+  padding: 0.5rem;
   border-radius: 4px;
-  color: #fff;
-  font-size: 16px;
-  cursor: pointer;
-  margin-top: 15px;
-}
-.button-togg:hover {
-  background-color: #dc3545;
-}
-.button-form {
-  width: 100%;
-  padding: 10px;
-  background-color: #ff0000;
-  border: none;
-  border-radius: 4px;
-  color: #fff;
-  font-size: 16px;
-  cursor: pointer;
+  border: 1px solid #173cbc; /* Borde del campo de entrada */
+  background-color: white;
+  color: black; /* Color del texto */
+  font-size: 1rem;
 }
 
-.button-form:hover {
-  background-color: #dc3545;
+/* Campos de entrada en foco */
+.input-field:focus {
+  outline: none;
+  border-color: #1d4ed8; /* Color del borde en foco */
+}
+
+/* Botón */
+.button-form {
+  background-color: #1d4ed8; /* Fondo del botón */
+  color: white; /* Color del texto del botón */
+  padding: 0.75rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: center;
+}
+
+/* Botón en foco y hover */
+.button-form:hover,
+.button-form:focus {
+  background-color: #173cbc; /* Fondo del botón en hover y foco */
 }

@@ -1,0 +1,40 @@
+/* Ajustar tamaño de las imágenes */
+.carousel-image {
+    max-width: 400px; /* Asegura que la imagen no exceda el ancho del contenedor */
+    height: auto; /* Mantiene la proporción de la imagen */
+    max-height: 400px; /* Altura máxima de la imagen */
+    object-fit: cover; /* Ajusta la imagen para que cubra el contenedor */
+  }
+  
+  /* Ajustar el contenedor del slide */
+  .carousel-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px; /* Altura fija del contenedor, ajusta según sea necesario */
+    overflow: hidden; /* Evita que las imágenes se desborden */
+  }
+  
+  /* Ajustar el contenedor del carrusel */
+  .galery-container .carousel .slider-wrapper {
+    max-height: 400px; /* Altura máxima del carrusel */
+    overflow: hidden; /* Evita que las imágenes se desborden */
+  }
+  
+  /* Ajustar la posición de las flechas del carrusel */
+  .galery-container .carousel .control-arrow {
+    background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para mejor visibilidad */
+    border-radius: 20%; /* Hacer las flechas circulares */
+    width: 40px; /* Ancho de las flechas */
+    height: 55px; /* Altura de las flechas */
+    top: calc(50% - 20px); /* Centra verticalmente las flechas */
+  }
+  
+  .galery-container .carousel .control-prev {
+    left: 35%; /* Ajusta la distancia de la flecha izquierda a la imagen */
+  }
+  
+  .galery-container .carousel .control-next {
+    right: 35%; /* Ajusta la distancia de la flecha derecha a la imagen */
+  }
+  

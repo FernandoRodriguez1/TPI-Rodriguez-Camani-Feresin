@@ -54,7 +54,7 @@ const App = () => {
         },
         {
           path: "/reviews",
-          element: <ReviewList/>,
+          element: <ReviewList />,
         },
       ],
     },
