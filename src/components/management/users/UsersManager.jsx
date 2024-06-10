@@ -1,45 +1,43 @@
-import { useContext } from "react";
-import { Table } from "react-bootstrap";
 
-import { APIContext } from "../../../services/apiContext/apiContext";
+import { useEffect, useState } from "react";
+import { GetAllUsers } from "./user-services";
 
 const UsersManager = () => {
-  const { users } = useContext(APIContext);
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const GetUsers = async () => {
+      setLoading(true); 
+      try {
+        const response = await GetAllUsers();
+        setUsers(response.data);
+        setLoading(false);
+      } catch (err) {
+        setError(err);
+        setLoading(false);
+      }
+    };
+    GetUsers();
+  }, []);
+
   return (
     <div>
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Password</th>
-            <th>User type</th>
-            <th>Gender</th>
-            <th>Age</th>
-            <th>Specialties</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user) => (
-            <tr key={user.UserId}>
-              <td>{user.UserId}</td>
-              <td>{user.UserName}</td>
-              <td>{user.Email}</td>
-              <td>{user.Password}</td>
-              <td>{user.UserType}</td>
-              <td>{user?.Gender}</td>
-              <td>{user?.Age}</td>
-              <td>
-                {user?.Specialties === "Both"
-                  ? "Hairdresser and Colourist"
-                  : user?.Specialties}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
-    </div>
+  {loading && <p>Loading...</p>}
+  {error && <p>Error: {error.message}</p>}
+  <ul>
+    {users.map((user) => (
+      <li key={user.email}>
+        <ul>
+          <li>Username: {user.username}</li>
+          <li>Email: {user.email}</li>
+        </ul>
+      </li>
+    ))}
+  </ul>
+</div>
+
   );
 };
 
