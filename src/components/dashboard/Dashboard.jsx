@@ -4,6 +4,7 @@ import "./Dashboard.css";
 
 import ReviewList from "../reviews/reviewList/ReviewList";
 import GaleryPhotosPage from "../galery-photos/galery-photos";
+import UsersManager from "../management/users/UsersManager";
 
 const Dashboard = () => {
   return (
@@ -23,6 +24,7 @@ const Dashboard = () => {
 
       <h4>Algunos de nuestros trabajos</h4>
       <GaleryPhotosPage/>
+      <UsersManager/>
     </div>
   );
 };
