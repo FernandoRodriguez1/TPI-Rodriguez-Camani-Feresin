@@ -4,30 +4,7 @@ import "./Login.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
-  const [contraseña, setContraseña] = useState("");
-  const users1 = [
-    {
-      id: "1",
-      email: "h1@gmail.com",
-      contraseña: "123",
-      rol: "Admin",
-    },
-    {
-      id: "2",
-      dni_client: "12340956",
-      name: "Client",
-      email: "cli@gmail.com",
-      contraseña: "12",
-      rol: "Client",
-    },
-    {
-      id: "3",
-      name: "Barber1",
-      email: "barb@gmail.com",
-      contraseña: "1",
-      rol: "Barber",
-    },
-  ];
+  const [password, setPassword] = useState("");
 
   const handleLogin = (e) => {
     e.preventDefault();
