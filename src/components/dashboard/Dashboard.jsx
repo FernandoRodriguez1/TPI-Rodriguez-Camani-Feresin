@@ -2,14 +2,15 @@ import { Link } from "react-router-dom";
 
 import "./Dashboard.css";
 
-import ReviewList from "../reviews/reviewList/ReviewList";
 import GaleryPhotosPage from "../galery-photos/galery-photos";
-import UsersManager from "../management/users/UsersManager";
+
+import UsersComponent from "../management/users/UsersManager";
+
+import AddUserForm from "../management/users/AddUserForm";
 
 const Dashboard = () => {
   return (
     <div className="dashboard-container">
-      
       <h1>TEGOBI'S</h1>
       <p>
         Hola, somos Tegobi's, un grupo de peluqueros asociados con más de 10
@@ -20,11 +21,14 @@ const Dashboard = () => {
         de imagen completo o simplemente un mantenimiento regular, ¡Estamos aquí
         para ayudarte a lucir tu mejor versión!
       </p>
-      <Link to="/appointment" className="link-ref">Quiero agendar un turno</Link>
+      <Link to="/appointment" className="link-ref">
+        Quiero agendar un turno
+      </Link>
 
       <h4>Algunos de nuestros trabajos</h4>
-      <GaleryPhotosPage/>
-      <UsersManager/>
+      <GaleryPhotosPage />
+      <UsersComponent />
+      <AddUserForm />
     </div>
   );
 };
