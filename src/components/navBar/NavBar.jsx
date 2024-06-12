@@ -7,26 +7,26 @@ const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   return (
     <nav>
-    <Link to="/" className="title">
-      TegoBis
-    </Link>
-    <div className="menu" onClick={() => setMenuOpen(!menuOpen)}>
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-    <ul className={menuOpen ? "open" : ""}>
-      <li>
-        <NavLink to="/asasa">Nosotros</NavLink>
-      </li>
-      <li>
-        <NavLink to="/editprofile">Nuestro Trabajo</NavLink>
-      </li>
-      <li>
-        <NavLink to="/appointment">Turnos</NavLink>
-      </li>
-    </ul>
-  </nav>
+      <Link to="/" className="title">
+        TegoBis
+      </Link>
+      <div className="menu" onClick={() => setMenuOpen(!menuOpen)}>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <ul className={menuOpen ? "open" : ""}>
+        <li>
+          <NavLink to="/asasa">Nosotros</NavLink>
+        </li>
+        <li>
+          <NavLink to="/editprofile">Nuestro Trabajo</NavLink>
+        </li>
+        <li>
+          <NavLink to="/appointment">Turnos</NavLink>
+        </li>
+      </ul>
+    </nav>
     // <nav className="navbar navbar-expand-lg bg-body-tertiary">
     //   <div className="container-fluid">
     //     <a className="navbar-brand" href="/">
