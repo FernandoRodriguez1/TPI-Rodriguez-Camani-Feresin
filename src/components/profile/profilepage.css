@@ -3,19 +3,16 @@
   margin: 0 auto;
   padding: 20px;
   text-align: center;
- 
 }
 
 .profile-container h1 {
   margin-bottom: 40px;
   font-size: 36px;
-
 }
-.title-form{
+.title-form {
   color: #fff;
-
 }
-.titles-appointments{
+.titles-appointments {
   color: #0f172a;
 }
 .formProfile {
@@ -44,7 +41,6 @@
   font-weight: bold;
 }
 
-/* Estilos para la lista de requisitos de la contraseña */
 .password-requirements {
   list-style-type: none;
   padding: 0;
@@ -61,8 +57,8 @@
 }
 
 .password-requirements li::before {
-  content: "✘"; /* Por defecto, mostrar X */
-  color: red; /* Color rojo para ✘ */
+  content: "✘";
+  color: red;
   position: absolute;
   left: 0;
   top: 0;
@@ -71,11 +67,10 @@
 }
 
 .password-requirements li.valid::before {
-  content: "✔"; /* Cambiar a check cuando es válido */
-  color: green; /* Color verde para ✔ */
+  content: "✔";
+  color: green;
 }
 
-/* Estilos para el botón de envío deshabilitado */
 .btn-form:disabled {
   background-color: #ccc;
   cursor: not-allowed;
@@ -101,7 +96,6 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
-  
 }
 
 .card-container ul {
@@ -111,19 +105,18 @@
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
-  
 }
 
 .card-item {
   border-radius: 10px;
-  
+
   margin: 20px;
   padding: 20px;
   max-width: 300px;
   width: 100%;
   box-sizing: border-box;
   transition: transform 0.2s;
-  background-color:#0f172a;
+  background-color: #0f172a;
 }
 
 .card-item:hover {

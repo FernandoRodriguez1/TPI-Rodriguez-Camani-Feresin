@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import "./profilepage.css";
+import { useNavigate } from "react-router-dom";
 const Profilepage = () => {
   const [newPassword, setNewPassword] = useState("");
   const [validations, setValidations] = useState({
@@ -10,6 +11,7 @@ const Profilepage = () => {
     lowercase: false,
     number: false,
   });
+  const navigate = useNavigate();
 
   const isFormValid = () => {
     return Object.values(validations).every(Boolean);
@@ -35,6 +37,11 @@ const Profilepage = () => {
       lowercase: /[a-z]/.test(value),
       number: /[0-9]/.test(value),
     });
+  };
+  const handleReviewRedirect = () => {
+    navigate("/reviews");
+    // le deberia pasar a el componente addReview, toda la informacion del turno, barbero y user.
+    //ASI en la page de addReview, se guardarian todos los datos y el user solo escribiria la reseña.
   };
   return (
     <div className="profile-container">
@@ -98,7 +105,9 @@ const Profilepage = () => {
             <h2 className="card-title">1/04/2024</h2>
             <p className="card-description">Corte de pelo</p>
             <div className="img-container"></div>
-            <button className="btn-review">Dejar una reseña</button>
+            <button className="btn-review" onClick={handleReviewRedirect}>
+              Dejar una reseña
+            </button>
           </li>
         </ul>
       </div>

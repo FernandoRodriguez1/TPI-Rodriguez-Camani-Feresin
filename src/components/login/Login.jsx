@@ -1,20 +1,23 @@
 import { useState } from "react";
-
 import "./Login.css";
+
+const users1 = [{ email: "usuario1@example.com", contraseña: "password1" }];
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleLogin = (e) => {
     e.preventDefault();
     const userverificar = users1.find(
-      (a) => a.email === email && a.contraseña === contraseña
+      (a) => a.email === email && a.contraseña === password
     );
     if (userverificar) {
+      setErrorMessage(""); // Limpiar mensaje de error
       alert("Inicio de sesión exitoso");
     } else {
-      alert("Error: Email o contraseña incorrectos");
+      setErrorMessage("Error: Email o contraseña incorrectos");
     }
     console.log(userverificar);
   };
@@ -28,7 +31,7 @@ const Login = () => {
       <form onSubmit={onSubmit} className="registro-form">
         <h2>Iniciar sesión</h2>
         <div className="form-group">
-          <label>Email:</label>
+          <label htmlFor="login-email">Email</label>
           <input
             className="input-field"
             type="email"
@@ -39,16 +42,17 @@ const Login = () => {
           />
         </div>
         <div className="form-group">
-          <label>Contraseña:</label>
+          <label htmlFor="login-password">Contraseña</label>
           <input
             className="input-field"
             type="password"
-            id="login-contraseña"
-            value={contraseña}
-            onChange={(e) => setContraseña(e.target.value)}
+            id="login-password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
         </div>
+        {errorMessage && <div className="error-message">{errorMessage}</div>}
         <button type="submit" className="button-form">
           Iniciar sesión
         </button>
