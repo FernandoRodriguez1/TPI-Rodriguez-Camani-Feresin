@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import GetAllUsers from "./HttpGetAllUsers";
 import UsersList from "./Userlist";
 import useDeleteUser from "./HttpDeleteUsers";
+import AddUserForm from "./AddUserForm";
 
 const UsersComponent = () => {
   const { users: initialUsers, loading, error: loadError } = GetAllUsers();
@@ -22,6 +23,7 @@ const UsersComponent = () => {
         <p>Error: {(loadError || deleteError).message}</p>
       )}
       <UsersList users={users} handleDeleteUser={handleDeleteUser} />
+      <AddUserForm />
     </div>
   );
 };

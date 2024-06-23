@@ -3,6 +3,7 @@ import {
   RouterProvider,
   createBrowserRouter,
 } from "react-router-dom";
+import { useContext, useEffect } from "react";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -18,8 +19,29 @@ import UsersManager from "./components/management/users/UsersManager";
 import Profilepage from "./components/profile/profilepage";
 import GaleryPhotosPage from "./components/galery-photos/galery-photos";
 import PageReviews from "./components/reviews/page-reviews/page-reviews";
+import UsersComponent from "./components/management/users/UsersManager";
+import {
+  AuthProvider,
+  AuthContext,
+} from "./components/AuthProvider/AuthProvider";
+import { ThemeContext } from "./components/Theme/ThemeContext";
 
 const App = () => {
+  const ProtectedElement = ({ element, allowedRoles }) => {
+    const { isLoggedIn, roles } = useContext(AuthContext);
+
+    if (!isLoggedIn || !allowedRoles.includes(roles)) {
+      return <Navigate to="/login" replace />;
+    }
+
+    return element;
+  };
+  const { theme } = useContext(ThemeContext);
+
+  useEffect(() => {
+    document.body.className = theme;
+  }, [theme]);
+
   const router = createBrowserRouter([
     { path: "/home", element: <Navigate to="/" replace /> },
     { path: "*", element: <NotFound /> },
@@ -41,9 +63,22 @@ const App = () => {
         },
         {
           path: "/appointment",
-          element: <AppointmentForm />,
+          element: (
+            <ProtectedElement
+              element={<AppointmentForm />}
+              allowedRoles={["Client"]}
+            />
+          ), // Client
         },
-        { path: "/manage/users", element: <UsersManager /> },
+        {
+          path: "/manage/users",
+          element: (
+            <ProtectedElement
+              element={<UsersManager />}
+              allowedRoles={["Admin"]}
+            />
+          ), // Admin
+        },
         {
           path: "/editprofile",
           element: <Profilepage />,
@@ -56,11 +91,19 @@ const App = () => {
           path: "/reviews",
           element: <PageReviews />,
         },
+        {
+          path: "/users",
+          element: <UsersComponent />,
+        },
       ],
     },
   ]);
 
-  return <RouterProvider router={router} />;
+  return (
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  );
 };
 
 export default App;
