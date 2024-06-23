@@ -4,9 +4,8 @@ import "./Dashboard.css";
 
 import GaleryPhotosPage from "../galery-photos/galery-photos";
 
-import UsersComponent from "../management/users/UsersManager";
-
 import AddUserForm from "../management/users/AddUserForm";
+import CustomChatbot from "../ChatBot/ChatBotComponent";
 
 const Dashboard = () => {
   return (
@@ -27,8 +26,7 @@ const Dashboard = () => {
 
       <h4>Algunos de nuestros trabajos</h4>
       <GaleryPhotosPage />
-      <UsersComponent />
-      <AddUserForm />
+      <CustomChatbot />
     </div>
   );
 };

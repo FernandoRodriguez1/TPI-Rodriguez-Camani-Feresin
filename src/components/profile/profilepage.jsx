@@ -1,9 +1,16 @@
-import { useState } from "react";
-
+import { useContext, useEffect, useState } from "react";
 import "./profilepage.css";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../AuthProvider/AuthProvider";
+import useTokenUser from "../hooks/useTokenUser";
+import api from "../API/api-hook";
+
 const Profilepage = () => {
+  const { isLoggedIn } = useContext(AuthContext);
+  const [userData, setUserData] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const navigate = useNavigate();
+  const { tokenInfo, error } = useTokenUser();
   const [validations, setValidations] = useState({
     minLength: false,
     maxLength: false,
@@ -11,7 +18,11 @@ const Profilepage = () => {
     lowercase: false,
     number: false,
   });
-  const navigate = useNavigate();
+
+  // Consolas de depuración
+  console.log("isLoggedIn:", isLoggedIn);
+  console.log("tokenInfo:", tokenInfo);
+  console.log("Error:", error);
 
   const isFormValid = () => {
     return Object.values(validations).every(Boolean);
@@ -38,15 +49,44 @@ const Profilepage = () => {
       number: /[0-9]/.test(value),
     });
   };
+
   const handleReviewRedirect = () => {
     navigate("/reviews");
-    // le deberia pasar a el componente addReview, toda la informacion del turno, barbero y user.
-    //ASI en la page de addReview, se guardarian todos los datos y el user solo escribiria la reseña.
   };
+
+  const InfoByUser = async () => {
+    try {
+      if (tokenInfo && tokenInfo.sub) {
+        const userId = tokenInfo.sub;
+        console.log("User ID:", userId);
+        const response = await api.get(`/User/get-user?id=${userId}`);
+        setUserData(response.data);
+        console.log("Info traída con éxito.");
+      } else {
+        console.error("tokenInfo o tokenInfo.sub es nulo.");
+      }
+    } catch (error) {
+      console.error("Error, no se pudo obtener información.", error);
+    }
+  };
+
+  useEffect(() => {
+    if (tokenInfo) {
+      console.log("useEffect se ejecuta con tokenInfo:", tokenInfo);
+      InfoByUser();
+    }
+  }, [tokenInfo]);
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
     <div className="profile-container">
       <form className="formProfile" onSubmit={handleSubmit}>
-        <h1 className="title-form">Modificar Credenciales</h1>
+        <h1 className="title-form">
+          Bienvenido {userData.userName} puedes modificar tus credenciales
+        </h1>
 
         <label>Ingrese su nueva contraseña</label>
         <input
@@ -82,20 +122,12 @@ const Profilepage = () => {
         <ul>
           <li className="card-item">
             <h2 className="card-title">30/05/2024</h2>
-            <p className="card-description">Corte de pelo + coloracion</p>
+            <p className="card-description">Corte de pelo + coloración</p>
             <div className="img-container"></div>
             <button className="btn-cancel">Cancelar turno</button>
           </li>
         </ul>
-
-        <ul>
-          <li className="card-item">
-            <h2 className="card-title">30/05/2024</h2>
-            <p className="card-description">Corte de pelo + coloracion</p>
-            <div className="img-container"></div>
-            <button className="btn-cancel">Cancelar turno</button>
-          </li>
-        </ul>
+        {/* Agregar más items según sea necesario */}
       </div>
 
       <h1 className="titles-appointments">Turnos ya concretados.</h1>

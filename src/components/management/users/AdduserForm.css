@@ -1,0 +1,86 @@
+/* AdduserForm.css */
+
+.container-userform {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: max-content;
+  padding: 20px;
+}
+
+.toggle-button-form {
+  display: block;
+  margin: 20px 0;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.toggle-button-form:hover {
+  background-color: #0056b3;
+}
+
+.card-form-users {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  width: 100%;
+  max-width: 500px;
+  transition: opacity 0.3s ease, height 0.3s ease;
+}
+
+.adduser-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group-userform {
+  margin-bottom: 15px;
+}
+
+.label-userform {
+  color: red;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.input-field-userform {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  box-sizing: border-box;
+}
+
+.button-form {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.button-form:hover {
+  background-color: #218838;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .card-form-users {
+    padding: 15px;
+  }
+
+  .toggle-button-form,
+  .button-form {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .input-field-userform {
+    padding: 10px;
+  }
+}
