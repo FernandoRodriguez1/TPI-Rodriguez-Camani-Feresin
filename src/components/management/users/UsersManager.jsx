@@ -23,7 +23,6 @@ const UsersComponent = () => {
         <p>Error: {(loadError || deleteError).message}</p>
       )}
       <UsersList users={users} handleDeleteUser={handleDeleteUser} />
-      <AddUserForm />
     </div>
   );
 };

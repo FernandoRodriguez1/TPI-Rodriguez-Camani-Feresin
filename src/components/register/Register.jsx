@@ -1,12 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import "./Register.css";
+import { ThemeContext } from "../Theme/ThemeContext";
+import useAddUser from "../management/users/HttpAddUsers";
 
 const Register = () => {
-  const [usuarios, setUsuarios] = useState([]);
-  const [nombre, setNombre] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { theme, setTheme } = useContext(ThemeContext);
   const [validations, setValidations] = useState({
     minLength: false,
     maxLength: false,
@@ -14,11 +13,24 @@ const Register = () => {
     lowercase: false,
     number: false,
   });
+  const {
+    username,
+    setUsername,
+    password,
+    setPassword,
+    age,
+    setAge,
+    email,
+    setEmail,
+    phonenumber,
+    setPhonenumber,
+    addUser,
+    error,
+  } = useAddUser();
 
   const handlePasswordChange = (e) => {
     const { value } = e.target;
     setPassword(value);
-
     setValidations({
       minLength: value.length >= 8,
       maxLength: value.length <= 16,
@@ -27,29 +39,13 @@ const Register = () => {
       number: /[0-9]/.test(value),
     });
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const nuevoUsuario = { id: usuarios.length + 1, nombre, email, contraseña };
-    setUsuarios([...usuarios, nuevoUsuario]);
-    setNombre("");
-    setEmail("");
-    setContraseña("");
-    guardarEnLocalStorage([...usuarios, nuevoUsuario]);
+    await addUser();
   };
-
-  const guardarEnLocalStorage = (data) => {
-    try {
-      const jsonData = JSON.stringify(data);
-      localStorage.setItem("usuarios", jsonData);
-      console.log("Datos guardados en localStorage");
-    } catch (error) {
-      console.error("Error al guardar en localStorage:", error);
-    }
-  };
-  console.log(usuarios);
 
   return (
-    <div className="registro-form-container ">
+    <div className={`registro-form-container ${theme}`}>
       <form onSubmit={handleSubmit} className="registro-form">
         <h2>Registro</h2>
         <div className="form-group">
@@ -57,9 +53,31 @@ const Register = () => {
           <input
             className="input-field"
             type="text"
-            id="nombre"
-            value={nombre}
-            onChange={(e) => setNombre(e.target.value)}
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label>Edad:</label>
+          <input
+            className="input-field"
+            type="number"
+            id="add-age"
+            value={age}
+            onChange={(e) => setAge(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label>Numero de Telefono:</label>
+          <input
+            className="input-field"
+            type="number"
+            id="add-number"
+            value={phonenumber}
+            onChange={(e) => setPhonenumber(e.target.value)}
             required
           />
         </div>
@@ -68,38 +86,39 @@ const Register = () => {
           <input
             className="input-field"
             type="email"
-            id="email"
+            id="add-email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
         <div className="form-group">
-        <label>Ingrese su nueva contraseña</label>
-        <input
-          onChange={handlePasswordChange}
-          type="password"
-          className="input-form"
-          value={password}
-        />
-        <ul className="password-requirements">
-          <li className={validations.minLength ? "valid" : ""}>
-            Al menos 8 caracteres.
-          </li>
-          <li className={validations.maxLength ? "valid" : ""}>
-            Máximo 16 caracteres.
-          </li>
-          <li className={validations.uppercase ? "valid" : ""}>
-            Por lo menos una mayúscula.
-          </li>
-          <li className={validations.lowercase ? "valid" : ""}>
-            Por lo menos una minúscula.
-          </li>
-          <li className={validations.number ? "valid" : ""}>
-            Deberá contar con al menos un número.
-          </li>
-        </ul>
+          <label>Contraseña</label>
+          <input
+            onChange={handlePasswordChange}
+            type="password"
+            className="input-field"
+            value={password}
+          />
+          <ul className="password-requirements">
+            <li className={validations.minLength ? "valid" : ""}>
+              Al menos 8 caracteres.
+            </li>
+            <li className={validations.maxLength ? "valid" : ""}>
+              Máximo 16 caracteres.
+            </li>
+            <li className={validations.uppercase ? "valid" : ""}>
+              Por lo menos una mayúscula.
+            </li>
+            <li className={validations.lowercase ? "valid" : ""}>
+              Por lo menos una minúscula.
+            </li>
+            <li className={validations.number ? "valid" : ""}>
+              Deberá contar con al menos un número.
+            </li>
+          </ul>
         </div>
+        {error && <p>Error: {error.message}</p>}
         <button type="submit" className="button-form">
           Registrarse
         </button>

@@ -13,19 +13,11 @@ const ReviewList = () => {
     alert("Reseña eliminada");
   };
 
-  const handleResponse = () => {
-    setShowResponseForm(true);
-  };
-
   const handleSubmitResponse = (e) => {
     e.preventDefault();
     alert("Respuesta enviada: " + response);
     setShowResponseForm(false);
     setResponse("");
-  };
-
-  const handleEdit = () => {
-    alert("Modificar reseña");
   };
 
   return (

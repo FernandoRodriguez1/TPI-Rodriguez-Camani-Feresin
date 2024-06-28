@@ -1,86 +1,79 @@
-/* AdduserForm.css */
-
 .container-userform {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: max-content;
+  margin-top: 20px;
   padding: 20px;
-}
-
-.toggle-button-form {
-  display: block;
-  margin: 20px 0;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-.toggle-button-form:hover {
-  background-color: #0056b3;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  width: 100%;
 }
 
 .card-form-users {
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  background-color: #ffffff;
+  border-radius: 8px;
   padding: 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  background-color: white;
-  width: 100%;
-  max-width: 500px;
-  transition: opacity 0.3s ease, height 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.adduser-form {
-  display: flex;
-  flex-direction: column;
-}
-
-.form-group-userform {
+.adduser-form .form-group-userform {
   margin-bottom: 15px;
 }
 
 .label-userform {
-  color: red;
-  margin-bottom: 5px;
   display: block;
+  margin-bottom: 5px;
 }
 
 .input-field-userform {
   width: 100%;
-  padding: 8px;
-  margin-top: 5px;
-  box-sizing: border-box;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
 }
 
 .button-form {
-  padding: 10px 20px;
-  background-color: #28a745;
+  background-color: #1d4ed8;
   color: white;
   border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .button-form:hover {
-  background-color: #218838;
+  background-color: #173cbc;
 }
 
-/* Responsive design */
-@media (max-width: 600px) {
-  .card-form-users {
-    padding: 15px;
-  }
-
-  .toggle-button-form,
-  .button-form {
-    width: 100%;
-    padding: 12px;
+@media (max-width: 768px) {
+  .container-userform {
+    padding: 10px;
   }
 
   .input-field-userform {
-    padding: 10px;
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .button-form {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container-userform {
+    padding: 5px;
+  }
+
+  .input-field-userform {
+    padding: 6px;
+    font-size: 12px;
+  }
+
+  .button-form {
+    padding: 6px 12px;
+    font-size: 12px;
   }
 }
