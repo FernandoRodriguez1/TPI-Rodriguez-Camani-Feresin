@@ -19,18 +19,29 @@ const ScheduleList = () => {
         if (response.data.availabilitySlots) {
           setSchedules([response.data]);
         } else {
-          console.error("API response is not an array:", response.data);
           setSchedules([]);
         }
       }
     } catch (error) {
-      console.error("Error fetching schedules:", error);
       setSchedules([]);
+    }
+  };
+
+  const handleDeleteSchedule = async () => {
+    try {
+      if (tokenInfo && tokenInfo.sub) {
+        const barberId = tokenInfo.sub;
+        const response = await api.delete(
+          `/api/BarberSchedules/${barberId}/schedules`
+        );
+        alert("Horarios eliminados");
+      }
+    } catch (error) {
+      alert("Error eliminando el horario:", error);
     }
   };
   useEffect(() => {
     if (tokenInfo) {
-      console.log("useEffect se ejecuta con tokenInfo:", tokenInfo);
       fetchSchedules();
     }
   }, [tokenInfo]);
@@ -51,6 +62,7 @@ const ScheduleList = () => {
                     <p>Disponible: {slot.isAvailable ? "Sí" : "No"}</p>
                   </div>
                 ))}
+                <button onClick={handleDeleteSchedule}>Eliminar Horario</button>
               </div>
             </div>
           ))

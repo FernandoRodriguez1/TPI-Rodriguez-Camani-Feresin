@@ -10,9 +10,9 @@ const GaleryPhotosPage = () => {
   const { theme, setTheme } = useContext(ThemeContext);
   useEffect(() => {
     const images = [
-      { url: image1, title: "Reseñas", link: "/link1" },
-      { url: image2, title: "Turnos", link: "/link2" },
-      { url: image3, title: "Iniciar Sesion", link: "/link3" },
+      { url: image1, title: "Reseñas", link: "/reviews" },
+      { url: image2, title: "Turnos", link: "/appointment" },
+      { url: image3, title: "Iniciar Sesion", link: "/login" },
     ];
 
     setPhotos(images);

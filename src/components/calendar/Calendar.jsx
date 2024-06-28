@@ -5,7 +5,6 @@ import "./Calendar.css";
 const Calendar = ({ selectedDate, onDateChange, disabled }) => {
   const isMonday = (date) => date.getDay() === 1;
 
-  // Obtener el primer y el último día del mes actual
   const today = new Date();
   const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
   const lastDayOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);

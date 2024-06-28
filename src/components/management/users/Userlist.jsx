@@ -1,15 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import AddUserForm from "./AddUserForm";
 import "./UserList.css";
+import { ThemeContext } from "../../Theme/ThemeContext";
+import AddBarberForm from "../barbers/AddBarberForm";
 
 const UsersList = ({ users = [], handleDeleteUser }) => {
+  const { theme, setTheme } = useContext(ThemeContext);
   const [isAddUserFormVisible, setIsAddUserFormVisible] = useState(false);
   const toggleAddUserFormVisibility = () => {
     setIsAddUserFormVisible(!isAddUserFormVisible);
   };
 
   return (
-    <div className="users-list-container">
+    <div className={`users-list-container ${theme}`}>
       <div className="users-table-container">
         <button
           onClick={toggleAddUserFormVisibility}
@@ -18,6 +21,7 @@ const UsersList = ({ users = [], handleDeleteUser }) => {
           {isAddUserFormVisible ? "Ocultar Formulario" : "Agregar Usuarios"}
         </button>
         {isAddUserFormVisible && <AddUserForm />}
+        {isAddUserFormVisible && <AddBarberForm />}
         <table className="users-table">
           <thead>
             <tr>
@@ -36,7 +40,7 @@ const UsersList = ({ users = [], handleDeleteUser }) => {
                 <td>{user.userId}</td>
                 <td>{user.userType}</td>
                 <td>
-                  {user.userType === 2 && (
+                  {(user.userType === 1 || user.userType === 2) && (
                     <button
                       onClick={() => handleDeleteUser(user.userId)}
                       className="delete-button"

@@ -36,8 +36,8 @@ const AppointmentForm = () => {
 
   useEffect(() => {
     if (selectedDate && schedules.length > 0) {
-      const dayMapping = [6, 0, 1, 2, 3, 4, 5]; // Mapping array
-      const dayOfTheWeek = dayMapping[selectedDate.getDay()]; // Adjusting the day
+      const dayMapping = [6, 0, 1, 2, 3, 4, 5];
+      const dayOfTheWeek = dayMapping[selectedDate.getDay()];
       const times = schedules
         .filter((slot) => slot.dayOfTheWeek === dayOfTheWeek)
         .map((slot) => ({
@@ -70,7 +70,6 @@ const AppointmentForm = () => {
     try {
       const jsonData = JSON.stringify(data);
       localStorage.setItem("appointments", jsonData);
-      console.log("Turno reservado con éxito");
     } catch (error) {
       console.error("Error al guardar turno:", error);
     }
@@ -106,8 +105,8 @@ const AppointmentForm = () => {
           onChange={(e) => {
             setBarberId(e.target.value);
             fetchSchedules(e.target.value);
-            setSelectedDate(null); // Reset date when barber changes
-            setAvailableTimes([]); // Reset available times when barber changes
+            setSelectedDate(null);
+            setAvailableTimes([]);
           }}
         >
           <option value="">Seleccione un barbero</option>
@@ -120,7 +119,7 @@ const AppointmentForm = () => {
         <Calendar
           selectedDate={selectedDate}
           onDateChange={setSelectedDate}
-          disabled={!barberId} // Disable if no barber is selected
+          disabled={!barberId}
         />
       </div>
       <AvailableTimes
@@ -136,7 +135,7 @@ const AppointmentForm = () => {
           list="time-options"
           value={hour}
           onChange={(e) => setHour(e.target.value)}
-          disabled={!selectedDate} // Disable if no date is selected
+          disabled={!selectedDate}
         />
         <datalist id="time-options">
           {availableHours.map((time, index) => (
@@ -150,7 +149,7 @@ const AppointmentForm = () => {
           className="select-field"
           value={product}
           onChange={(e) => setProduct(e.target.value)}
-          disabled={!hour} // Disable if no time is selected
+          disabled={!hour}
         >
           <option value="">Seleccione un servicio</option>
           <option value="Corte normal">Corte normal ($5000)</option>
