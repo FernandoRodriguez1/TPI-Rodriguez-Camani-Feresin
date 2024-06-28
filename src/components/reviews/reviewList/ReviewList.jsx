@@ -1,54 +1,70 @@
-import { useState } from "react";
 import "./ReviewList.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faComment } from "@fortawesome/free-regular-svg-icons";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { ThemeContext } from "../../Theme/ThemeContext";
+import React, { useEffect, useState, useContext } from "react";
+import useTokenUser from "../../hooks/useTokenUser";
+import api from "../../API/api-hook";
+import AdminReviewList from "./AdminReviewList";
 
 const ReviewList = () => {
-  const [showResponseForm, setShowResponseForm] = useState(false);
-  const [response, setResponse] = useState("");
+  const { theme } = useContext(ThemeContext);
+  const [reviews, setReviews] = useState([]);
+  const { tokenInfo, error: tokenError } = useTokenUser();
+  const [admin, setAdmin] = useState("");
+
+  const fetchReviews = async () => {
+    try {
+      if (tokenInfo && tokenInfo.sub) {
+        const userId = tokenInfo.sub;
+        setAdmin(userId);
+
+        const response = await api.get(
+          `Review/get-reviews-by-userId/${userId}`
+        );
+        if (response.data) {
+          setReviews(response.data);
+        } else {
+          setReviews([]);
+        }
+      }
+    } catch (error) {
+      console.error("Error obteniendo reseñas:", error);
+      setReviews([]);
+    }
+  };
 
   const handleDelete = () => {
-    alert("Reseña eliminada");
+    // Implementación para borrar una reseña
   };
 
-  const handleSubmitResponse = (e) => {
-    e.preventDefault();
-    alert("Respuesta enviada: " + response);
-    setShowResponseForm(false);
-    setResponse("");
-  };
+  useEffect(() => {
+    if (tokenInfo) {
+      fetchReviews();
+    }
+  }, [tokenInfo]);
 
   return (
     <div className="ReviewList">
-      <div className="ReviewItem">
-        <p className="content-review">
-          Muy buenos cortes mal estoy re fachero para ir de joda.
-        </p>
-        <div className="button-group">
-          <button onClick={handleDelete} className="button-delete">
-            <FontAwesomeIcon icon={faXmark} />
-          </button>
-          <button onClick={handleResponse} className="button-comment">
-            <FontAwesomeIcon icon={faComment} />
-          </button>
-          <button onClick={handleEdit} className="button-edit">
-            <FontAwesomeIcon icon={faEdit} />
-          </button>
+      {admin === "1" ? (
+        <AdminReviewList />
+      ) : (
+        <div className="ReviewItem">
+          {reviews.length > 0 ? (
+            reviews.map((review, index) => (
+              <div key={index} className="review">
+                <p>{review.Description}</p>
+                <p>{review.CreationDate}</p>
+                <button onClick={handleDelete} className="button-delete">
+                  <FontAwesomeIcon icon={faXmark} />
+                </button>
+              </div>
+            ))
+          ) : (
+            <p>No tienes reviews hechas.</p>
+          )}
         </div>
-        {showResponseForm && (
-          <form onSubmit={handleSubmitResponse}>
-            <textarea
-              value={response}
-              onChange={(e) => setResponse(e.target.value)}
-              placeholder="Escribe tu respuesta aquí..."
-              required
-            />
-            <button type="submit">Enviar respuesta</button>
-          </form>
-        )}
-      </div>
+      )}
     </div>
   );
 };

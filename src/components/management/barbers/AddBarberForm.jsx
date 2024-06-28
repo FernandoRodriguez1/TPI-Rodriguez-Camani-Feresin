@@ -1,32 +1,28 @@
-import React from "react";
-import useAddUser from "./HttpAddUsers";
-import "./AdduserForm.css";
+import React, { useState } from "react";
+import useAddBarber from "./HttpAddBarber";
+import "./AddBarberForm.css";
 
-const AddUserForm = () => {
+const AddBarberForm = () => {
   const {
     username,
     setUsername,
     password,
     setPassword,
-    age,
-    setAge,
     email,
     setEmail,
-    phonenumber,
-    setPhonenumber,
-    addUser,
+    addBarber,
     error,
-  } = useAddUser();
+  } = useAddBarber();
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await addUser();
+    await addBarber();
   };
 
   return (
     <div className="container-userform">
       <div className="card-form-users">
-        <h1>Agregar Usuarios nuevos</h1>
+        <h1>Agregar Barberos nuevos</h1>
         <form onSubmit={onSubmit} className="adduser-form">
           <div className="form-group-userform">
             <label className="label-userform">Username</label>
@@ -36,24 +32,6 @@ const AddUserForm = () => {
               id="add-username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-            <label className="label-userform">Edad</label>
-            <input
-              className="input-field-userform"
-              type="number"
-              id="add-age"
-              value={age}
-              onChange={(e) => setAge(e.target.value)}
-              required
-            />
-            <label className="label-userform">Numero de telefono</label>
-            <input
-              className="input-field-userform"
-              type="number"
-              id="add-number"
-              value={phonenumber}
-              onChange={(e) => setPhonenumber(e.target.value)}
               required
             />
             <label className="label-userform">Email</label>
@@ -79,7 +57,7 @@ const AddUserForm = () => {
           </div>
           {error && <p>Error: {error.message}</p>}
           <button type="submit" className="button-form">
-            Agregar Usuario
+            Agregar Barbero
           </button>
         </form>
       </div>
@@ -87,4 +65,4 @@ const AddUserForm = () => {
   );
 };
 
-export default AddUserForm;
+export default AddBarberForm;

@@ -13,7 +13,6 @@ const GetAllUsers = () => {
         const response = await api.get("User/get-users");
         setUsers(response.data);
         setLoading(false);
-        console.log(response);
       } catch (err) {
         setError(err);
         setLoading(false);

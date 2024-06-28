@@ -55,14 +55,10 @@ const ScheduleForm = () => {
         `/api/BarberSchedules/${barberId}/schedules`,
         barberScheduleDTO
       );
-      console.log(barberScheduleDTO);
-      if (response.ok) {
-        console.log("Horario enviado con éxito");
-      } else {
-        console.error("Error al enviar el horario");
-      }
+
+      alert("Horario Creado con exito");
     } catch (error) {
-      console.error("Error de red:", error);
+      alert("No se pudo crear el horario:", error);
     }
   };
 

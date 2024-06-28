@@ -27,20 +27,29 @@ const Profilepage = () => {
   });
   const { theme, setTheme } = useContext(ThemeContext);
 
-  console.log("isLoggedIn:", isLoggedIn);
-  console.log("tokenInfo:", tokenInfo);
-  console.log("Token Error:", tokenError);
-
   const isFormValid = () => {
     return Object.values(validations).every(Boolean);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (isFormValid()) {
-      console.log("Formulario enviado");
+      const requestData = {
+        passwordHash: newPassword,
+      };
+      try {
+        if (tokenInfo && tokenInfo.sub) {
+          const userId = tokenInfo.sub;
+
+          await api.patch(`/User/change-password?id=${userId}`, requestData);
+          alert("Se ha modificado tu contraseña correctamente.");
+          setNewPassword("");
+        }
+      } catch (error) {
+        alert("Hubo un error al modificar tu contraseña.");
+      }
     } else {
-      console.log("La contraseña no cumple con todos los requisitos");
+      alert("La contraseña no cumple con todos los requisitos");
     }
   };
 
@@ -61,12 +70,9 @@ const Profilepage = () => {
     try {
       if (tokenInfo && tokenInfo.sub) {
         const userId = tokenInfo.sub;
-        console.log("User ID:", userId);
+
         const response = await api.get(`/User/get-user?id=${userId}`);
         setUserData(response.data);
-        console.log("Info traída con éxito.");
-      } else {
-        console.error("tokenInfo o tokenInfo.sub es nulo.");
       }
     } catch (error) {
       console.error("Error, no se pudo obtener información.", error);
@@ -78,13 +84,12 @@ const Profilepage = () => {
     try {
       if (tokenInfo && tokenInfo.sub) {
         const idUser = tokenInfo.sub;
-        console.log("User 1ID:", idUser);
+
         const response = await api.get(
           `Review/get-reviews-by-userId/${tokenInfo.sub}`
         );
         setAppointments(response.data);
         setLoading(false);
-        console.log("appointments hechos");
       }
     } catch (err) {
       setError(err);
@@ -95,7 +100,6 @@ const Profilepage = () => {
 
   useEffect(() => {
     if (tokenInfo) {
-      console.log("useEffect se ejecuta con tokenInfo:", tokenInfo);
       InfoByUser();
       fetchAppointments(tokenInfo.sub);
     }
