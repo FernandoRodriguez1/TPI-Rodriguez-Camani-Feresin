@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { jwtDecode } from "jwt-decode"; // Importar sin llaves
+import { jwtDecode } from "jwt-decode";
 
 const useTokenUser = () => {
   const [tokenInfo, setTokenInfo] = useState(null);

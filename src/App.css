@@ -5,10 +5,16 @@
 }
 body {
   background-color: #cfd0d3;
+  font-family: "SF Pro Text";
 }
-/* App.css */
+@font-face {
+  font-family: "SF Pro Text";
+  font-style: normal;
+  font-weight: 500;
+  src: url("https://raw.githubusercontent.com/blaisck/sfwin/master/SFPro/TrueType/SFProText-Medium.ttf");
+}
 body.light {
-  background-color: white;
+  background-color: #f0f2f5;
   color: black;
 }
 
@@ -16,7 +22,7 @@ body.dark {
   background-color: black;
   color: white;
 }
-/* App.css */
+
 .darklightButton {
   display: flex;
   align-items: center;

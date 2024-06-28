@@ -15,7 +15,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import Login from "./components/login/Login";
 import Register from "./components/register/Register";
 import AppointmentForm from "./components/appointments/createAppointment/CreateAppointment";
-import UsersManager from "./components/management/users/UsersManager";
+
 import Profilepage from "./components/profile/profilepage";
 import GaleryPhotosPage from "./components/galery-photos/galery-photos";
 import PageReviews from "./components/reviews/page-reviews/page-reviews";
@@ -26,16 +26,21 @@ import {
 } from "./components/AuthProvider/AuthProvider";
 import { ThemeContext } from "./components/Theme/ThemeContext";
 
+import BarberComponent from "./components/barber/BarberComponent";
+
+const ProtectedElement = ({ element, allowedRoles }) => {
+  const { isLoggedIn, roles } = useContext(AuthContext);
+
+  if (!isLoggedIn) {
+    return <Navigate to="/login" replace />;
+  } else if (!allowedRoles.includes(roles)) {
+    return <Navigate to="/error" replace />;
+  }
+
+  return element;
+};
+
 const App = () => {
-  const ProtectedElement = ({ element, allowedRoles }) => {
-    const { isLoggedIn, roles } = useContext(AuthContext);
-
-    if (!isLoggedIn || !allowedRoles.includes(roles)) {
-      return <Navigate to="/login" replace />;
-    }
-
-    return element;
-  };
   const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
@@ -68,16 +73,16 @@ const App = () => {
               element={<AppointmentForm />}
               allowedRoles={["Client"]}
             />
-          ), // Client
+          ),
         },
         {
-          path: "/manage/users",
+          path: "/users",
           element: (
             <ProtectedElement
-              element={<UsersManager />}
+              element={<UsersComponent />}
               allowedRoles={["Admin"]}
             />
-          ), // Admin
+          ),
         },
         {
           path: "/editprofile",
@@ -92,8 +97,13 @@ const App = () => {
           element: <PageReviews />,
         },
         {
-          path: "/users",
-          element: <UsersComponent />,
+          path: "/schedule",
+          element: (
+            <ProtectedElement
+              element={<BarberComponent />}
+              allowedRoles={["Barber"]}
+            />
+          ),
         },
       ],
     },

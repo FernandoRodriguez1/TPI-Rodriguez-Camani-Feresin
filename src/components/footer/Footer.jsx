@@ -1,4 +1,3 @@
-// Footer.jsx
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebook,
@@ -60,7 +59,7 @@ const Footer = ({ theme }) => {
         <div className="row">
           <div className="col text-center">
             <div className="footer-section">
-              © Augusto Camani, Santiago Feresin, Fernando Rodriguez
+              © Augusto Camani, Fernando Rodriguez
             </div>
           </div>
         </div>

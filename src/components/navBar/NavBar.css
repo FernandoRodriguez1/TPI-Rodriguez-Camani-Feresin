@@ -1,5 +1,5 @@
 .active {
-  background-color: #1d4ed8;
+  background-color: #007bff;
 }
 
 .navbar.light {
@@ -9,7 +9,23 @@
 
 .navbar.dark {
   background-color: #0f172a;
+  color: black;
+}
+.button-navbar-logout.light {
+  background-color: #0f172a;
   color: white;
+}
+.button-navbar-logout.dark {
+  background-color: rgb(239, 234, 226);
+  color: black;
+}
+.button-navbar-logout {
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: center;
 }
 
 nav {
@@ -24,6 +40,7 @@ nav {
 nav .title {
   font-size: 1.5rem;
   margin: 1rem;
+  margin-left: 35px;
   font-weight: bold;
   text-decoration: none;
 }
@@ -88,7 +105,6 @@ nav .menu span {
   nav .menu {
     display: flex;
   }
-
   nav {
     flex-direction: column;
     align-items: flex-start;
@@ -97,16 +113,15 @@ nav .menu span {
   nav ul {
     display: none;
     flex-direction: column;
-    width: 100%;
+    width: max-content;
     margin-bottom: 0.25rem;
   }
-
   nav ul.open {
     display: flex;
   }
 
   nav ul li {
-    width: 100%;
+    width: 90%;
     text-align: center;
   }
 

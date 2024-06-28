@@ -1,16 +1,23 @@
 import { useContext, useEffect, useState } from "react";
 import "./profilepage.css";
-import { useNavigate } from "react-router-dom";
+
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import useTokenUser from "../hooks/useTokenUser";
 import api from "../API/api-hook";
+
+import { ThemeContext } from "../Theme/ThemeContext";
+import UserListsAppointments from "../appointments/UserAppointment/UserListsAppointment";
+import RedirectToLogin from "../../routes/RedirectToLogin";
 
 const Profilepage = () => {
   const { isLoggedIn } = useContext(AuthContext);
   const [userData, setUserData] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const navigate = useNavigate();
-  const { tokenInfo, error } = useTokenUser();
+  const [appointments, setAppointments] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const { tokenInfo, error: tokenError } = useTokenUser();
   const [validations, setValidations] = useState({
     minLength: false,
     maxLength: false,
@@ -18,11 +25,11 @@ const Profilepage = () => {
     lowercase: false,
     number: false,
   });
+  const { theme, setTheme } = useContext(ThemeContext);
 
-  // Consolas de depuración
   console.log("isLoggedIn:", isLoggedIn);
   console.log("tokenInfo:", tokenInfo);
-  console.log("Error:", error);
+  console.log("Token Error:", tokenError);
 
   const isFormValid = () => {
     return Object.values(validations).every(Boolean);
@@ -50,10 +57,6 @@ const Profilepage = () => {
     });
   };
 
-  const handleReviewRedirect = () => {
-    navigate("/reviews");
-  };
-
   const InfoByUser = async () => {
     try {
       if (tokenInfo && tokenInfo.sub) {
@@ -70,20 +73,41 @@ const Profilepage = () => {
     }
   };
 
+  const fetchAppointments = async () => {
+    setLoading(true);
+    try {
+      if (tokenInfo && tokenInfo.sub) {
+        const idUser = tokenInfo.sub;
+        console.log("User 1ID:", idUser);
+        const response = await api.get(
+          `Review/get-reviews-by-userId/${tokenInfo.sub}`
+        );
+        setAppointments(response.data);
+        setLoading(false);
+        console.log("appointments hechos");
+      }
+    } catch (err) {
+      setError(err);
+      setLoading(false);
+      console.error("Error fetching appointments:", err);
+    }
+  };
+
   useEffect(() => {
     if (tokenInfo) {
       console.log("useEffect se ejecuta con tokenInfo:", tokenInfo);
       InfoByUser();
+      fetchAppointments(tokenInfo.sub);
     }
   }, [tokenInfo]);
 
-  if (error) {
-    return <div>Error: {error}</div>;
+  if (tokenError) {
+    return <RedirectToLogin />;
   }
 
   return (
-    <div className="profile-container">
-      <form className="formProfile" onSubmit={handleSubmit}>
+    <div className={`profile-container ${theme}`}>
+      <form className={`formProfile ${theme}`} onSubmit={handleSubmit}>
         <h1 className="title-form">
           Bienvenido {userData.userName} puedes modificar tus credenciales
         </h1>
@@ -118,31 +142,13 @@ const Profilepage = () => {
       </form>
 
       <h1 className="titles-appointments">Mis reservas</h1>
-      <div className="card-container">
-        <ul>
-          <li className="card-item">
-            <h2 className="card-title">30/05/2024</h2>
-            <p className="card-description">Corte de pelo + coloración</p>
-            <div className="img-container"></div>
-            <button className="btn-cancel">Cancelar turno</button>
-          </li>
-        </ul>
-        {/* Agregar más items según sea necesario */}
-      </div>
-
-      <h1 className="titles-appointments">Turnos ya concretados.</h1>
-      <div className="card-container">
-        <ul>
-          <li className="card-item">
-            <h2 className="card-title">1/04/2024</h2>
-            <p className="card-description">Corte de pelo</p>
-            <div className="img-container"></div>
-            <button className="btn-review" onClick={handleReviewRedirect}>
-              Dejar una reseña
-            </button>
-          </li>
-        </ul>
-      </div>
+      {loading ? (
+        <p>Cargando reservas...</p>
+      ) : error ? (
+        <p>Error: {error.message}</p>
+      ) : (
+        <UserListsAppointments appointments={appointments} />
+      )}
     </div>
   );
 };

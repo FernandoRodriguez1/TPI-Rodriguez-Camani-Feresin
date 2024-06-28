@@ -1,55 +1,40 @@
-import React, { useState, useEffect } from 'react';
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // este implementa los estilos del carrousel, es necesario.
-import { Carousel } from 'react-responsive-carousel';
-import { getAllPhotosHaircut } from './photos-service'; 
+import React, { useState, useEffect, useContext } from "react";
 import "./galery-photos.css";
 import image1 from "./../Photos/Barberia-1.jpeg";
 import image2 from "./../Photos/Barberia-2.webp";
 import image3 from "./../Photos/Barberia-3.webp";
+import { ThemeContext } from "../Theme/ThemeContext";
 
 const GaleryPhotosPage = () => {
-    const [photos, setPhotos] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-  
-
-    useEffect(() => {
-    //   const fetchPhotos = async () => {
-    //     try {
-    //       const response = await getAllPhotosHaircut();
-    //       setPhotos(response.data);
-    //       setLoading(false);
-    //     } catch (err) {
-    //       setError(err);
-    //       setLoading(false);
-    //     }
-    //   };
-  
-    //   fetchPhotos();
+  const [photos, setPhotos] = useState([]);
+  const { theme, setTheme } = useContext(ThemeContext);
+  useEffect(() => {
     const images = [
-      { url: image1 },
-      { url: image2 },
-      { url: image3 }
+      { url: image1, title: "Reseñas", link: "/link1" },
+      { url: image2, title: "Turnos", link: "/link2" },
+      { url: image3, title: "Iniciar Sesion", link: "/link3" },
     ];
 
     setPhotos(images);
-     }, []);
-  
-    if (loading) return <p>Cargando fotos...</p>;
-    if (error) return <p>Error al cargar fotos: {error.message}</p>;
-  
-    return (
-      <div className="galery-container">
-      <Carousel showThumbs={false} autoPlay infiniteLoop>
-        {photos.map((photo, index) => (
-          <div key={index} className="carousel-slide">
-            <img src={photo.url} alt={`Foto ${index + 1}`} className="carousel-image" />
-          </div>
-        ))}
-      </Carousel>
-    </div>
+  }, []);
 
-    );
+  return (
+    <div className={`galery-container ${theme}`}>
+      {photos.map((photo, index) => (
+        <div key={index} className={`photo-card ${theme}`}>
+          <img
+            src={photo.url}
+            alt={`Foto ${index + 1}`}
+            className="photo-image"
+          />
+          <h2 className="photo-title">{photo.title}</h2>
+          <a href={photo.link} className="photo-button">
+            Ver más
+          </a>
+        </div>
+      ))}
+    </div>
+  );
 };
 
 export default GaleryPhotosPage;

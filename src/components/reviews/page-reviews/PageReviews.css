@@ -1,11 +1,9 @@
-/* Estilos para el contenedor principal de PageReviews */
 .PageReviews {
   padding: 20px;
   background-color: #f9f9f9;
   font-family: Arial, sans-serif;
 }
 
-/* Estilo para el encabezado en PageReviews */
 .PageReviews h1 {
   font-size: 2em;
   color: #333;
